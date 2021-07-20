@@ -20,9 +20,9 @@ dag = DAG(
 
 notebook_op_7ca054b8_6235_4826_b756_e11a0bd7ed23 = NotebookOp(
     name="load_data",
-    namespace="airflow",
+    namespace="default",
     task_id="load_data",
-    notebook="load_data.ipynb",
+    notebook="examples/pipelines/hello_world/load_data.ipynb",
     cos_endpoint="http://34.64.108.55:9001/",
     cos_bucket="emart-dt-prd-datalake",
     cos_directory="untitled-0719164149",
@@ -43,7 +43,7 @@ notebook_op_7ca054b8_6235_4826_b756_e11a0bd7ed23 = NotebookOp(
 
 notebook_op_489dd75b_1bf9_42d5_a1bc_9536de078b38 = NotebookOp(
     name="Part_1___Data_Cleaning",
-    namespace="airflow",
+    namespace="default",
     task_id="Part_1___Data_Cleaning",
     notebook="examples/pipelines/hello_world/Part 1 - Data Cleaning.ipynb",
     cos_endpoint="http://34.64.108.55:9001/",
@@ -71,7 +71,7 @@ notebook_op_489dd75b_1bf9_42d5_a1bc_9536de078b38 = NotebookOp(
 
 notebook_op_47df13ba_e0bc_4b8a_8277_cb351aba952d = NotebookOp(
     name="Part_2___Data_Analysis",
-    namespace="airflow",
+    namespace="default",
     task_id="Part_2___Data_Analysis",
     notebook="examples/pipelines/hello_world/Part 2 - Data Analysis.ipynb",
     cos_endpoint="http://34.64.108.55:9001/",
@@ -99,7 +99,7 @@ notebook_op_47df13ba_e0bc_4b8a_8277_cb351aba952d = NotebookOp(
 
 notebook_op_256cd78d_f1f4_49c6_8725_bd6d5d46d8d4 = NotebookOp(
     name="Part_3___Time_Series_Forecasting",
-    namespace="airflow",
+    namespace="default",
     task_id="Part_3___Time_Series_Forecasting",
     notebook="examples/pipelines/hello_world/Part 3 - Time Series Forecasting.ipynb",
     cos_endpoint="http://34.64.108.55:9001/",
