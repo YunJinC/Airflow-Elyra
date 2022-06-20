@@ -51,25 +51,12 @@ t1 = KubernetesPodOperator(
                         # automatically assigned the label
                         # 'cloud.google.com/gke-nodepool' with the value of
                         # the nodepool's name.
-                        'key': 'CPU',
+                        'key': 'cloud.google.com/gke-nodepool',
                         'operator': 'In',
                         # The label key's value that pods can be scheduled
                         # on.
                         'values': [
-                            '4',
-                        ]
-                    },{
-                        # When nodepools are created in Google Kubernetes
-                        # Engine, the nodes inside of that nodepool are
-                        # automatically assigned the label
-                        # 'cloud.google.com/gke-nodepool' with the value of
-                        # the nodepool's name.
-                        'key': 'MEM',
-                        'operator': 'In',
-                        # The label key's value that pods can be scheduled
-                        # on.
-                        'values': [
-                            '16',
+                            'user-pool-cpu2-mem8',
                         ]
                     }]
                 }]
