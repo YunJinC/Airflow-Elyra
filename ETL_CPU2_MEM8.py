@@ -14,7 +14,7 @@ args = {
 #    'on_failure_callback' : alert.slack_fail_alert,
      }
 
-dag  = DAG(dag_id='ETL_CPU4_MEM16',
+dag  = DAG(dag_id='ETL_CPU2_MEM8',
            default_args=args,
            schedule_interval=timedelta(days=1),
            tags=['Kube'],
@@ -25,8 +25,8 @@ dag  = DAG(dag_id='ETL_CPU4_MEM16',
 # instead, create a cluster and use the GKEStartPodOperator
 # https://cloud.google.com/composer/docs/using-gke-operator
 t1 = KubernetesPodOperator(
-    task_id='ex-pod-affinity',
-    name='ex-pod-affinity',
+    task_id='ETL_CPU2_MEM8_TASK',
+    name='jupyterhub-cluster',
     namespace='airflow-cluster',
     image='perl',
     cmds=['perl'],
