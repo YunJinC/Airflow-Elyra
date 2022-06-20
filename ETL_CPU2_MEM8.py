@@ -26,11 +26,13 @@ dag  = DAG(dag_id='ETL_CPU2_MEM8',
 # https://cloud.google.com/composer/docs/using-gke-operator
 t1 = KubernetesPodOperator(
     task_id='ETL_CPU2_MEM8_TASK',
-    name='jupyterhub-cluster',
+    name='ETL_CPU2_MEM8_TASK',
     namespace='airflow-cluster',
     image='perl',
     cmds=['perl'],
     arguments=['-Mbignum=bpi', '-wle', 'print bpi(2000)'],
+    is_delete_operator_pod=True,
+    in_cluster=True,
     # affinity allows you to constrain which nodes your pod is eligible to
     # be scheduled on, based on labels on the node. In this case, if the
     # label 'cloud.google.com/gke-nodepool' with value
