@@ -24,10 +24,10 @@ dag  = DAG(dag_id='ETL_CPU2_MEM8',
 # is not supported with Composer 2
 # instead, create a cluster and use the GKEStartPodOperator
 # https://cloud.google.com/composer/docs/using-gke-operator
-kubernetes_affinity_ex = KubernetesPodOperator(
+t1 = KubernetesPodOperator(
     task_id='ex-pod-affinity',
     name='ex-pod-affinity',
-    namespace='default',
+    namespace='airflow-cluster',
     image='perl',
     cmds=['perl'],
     arguments=['-Mbignum=bpi', '-wle', 'print bpi(2000)'],
