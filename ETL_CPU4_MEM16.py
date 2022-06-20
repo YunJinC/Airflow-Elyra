@@ -75,6 +75,8 @@ t1 = KubernetesPodOperator(
                 }]
             }
         }
-    })
+    },
+    dag=dag
+    )
 
 t1
