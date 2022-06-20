@@ -1,6 +1,6 @@
 from airflow.models import DAG
 from airflow.utils.dates import days_ago
-from airflow.operators.bash_operator import BashOperator
+from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
 import pendulum
 from datetime import datetime
 from datetime import timedelta
