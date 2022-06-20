@@ -14,7 +14,7 @@ args = {
 #    'on_failure_callback' : alert.slack_fail_alert,
      }
 
-dag  = DAG(dag_id='ETL_CPU4_MEM16',
+dag  = DAG(dag_id='ETL_CPU2_MEM8',
            default_args=args,
            schedule_interval=timedelta(days=1),
            tags=['Kube'],
@@ -56,7 +56,7 @@ t1 = KubernetesPodOperator(
                         # The label key's value that pods can be scheduled
                         # on.
                         'values': [
-                            '4',
+                            '2',
                         ]
                     },{
                         # When nodepools are created in Google Kubernetes
@@ -69,7 +69,7 @@ t1 = KubernetesPodOperator(
                         # The label key's value that pods can be scheduled
                         # on.
                         'values': [
-                            '16',
+                            '8',
                         ]
                     }]
                 }]
