@@ -21,7 +21,7 @@ dag  = DAG(dag_id='ETL_ON_PREM',
         )
 
 t1 = BashOperator(task_id='task1',
-                  bash_command='ls',
+                  bash_command='echo "ETL on-prem"',
                   trigger_rule=TriggerRule.ALL_DONE,
                   dag=dag)
 
