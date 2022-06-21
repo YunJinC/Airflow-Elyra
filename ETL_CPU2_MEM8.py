@@ -43,12 +43,13 @@ affinity = k8s.V1Affinity(
 t1 = KubernetesPodOperator(
     task_id='ETL_CPU2_MEM8_TASK',
     name='ETL_CPU2_MEM8_TASK',
-    namespace='airflow-cluster',
+    namespace='default',
+    # namespace='airflow-cluster',
     image='perl',
     cmds=['perl'],
     arguments=['-Mbignum=bpi', '-wle', 'print bpi(2000)'],
-    is_delete_operator_pod=True,
-    in_cluster=True,
+    # is_delete_operator_pod=True,
+    # in_cluster=True,
     affinity=affinity,
     dag=dag
     )
