@@ -24,13 +24,15 @@ dag  = DAG(dag_id='ETL_CPU2_MEM8',
 
 affinity = k8s.V1Affinity(
             node_affinity=k8s.V1NodeAffinity(
-                required_during_scheduling_ignored_during_execution=[
-                    k8s.V1NodeSelectorTerm(
-                        match_expressions=[
-                            k8s.V1NodeSelectorRequirement(key='CPU', operator='In', values=['2'])
-                        ]
-                    )
-                ]
+                required_during_scheduling_ignored_during_execution=k8s.V1NodeSelector(
+                    node_selector_terms = [
+                        k8s.V1NodeSelectorTerm(
+                            match_expressions=[
+                                k8s.V1NodeSelectorRequirement(key='CPU', operator='In', values=['2'])
+                            ]
+                        )
+                    ]
+                )
             )
         )
 # Pod affinity with the KubernetesPodOperator
