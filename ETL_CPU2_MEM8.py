@@ -50,6 +50,10 @@ t1 = KubernetesPodOperator(
     # is_delete_operator_pod=True,
     # in_cluster=True,
     # affinity=affinity,
+    node_selectors={
+        "CPU": "2",
+        "MEM": "8"
+    },
     dag=dag
     )
 
