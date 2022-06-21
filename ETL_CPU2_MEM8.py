@@ -23,7 +23,7 @@ dag  = DAG(dag_id='ETL_CPU2_MEM8',
         )
 
 affinity = k8s.V1Affinity(
-            pod_anti_affinity=k8s.V1PodAntiAffinity(
+            node_affinity=k8s.V1NodeAffinity(
                 required_during_scheduling_ignored_during_execution=[
                     k8s.V1PodAffinityTerm(
                         label_selector=k8s.V1LabelSelector(
@@ -43,8 +43,8 @@ affinity = k8s.V1Affinity(
 t1 = KubernetesPodOperator(
     task_id='ETL_CPU2_MEM8_TASK',
     name='ETL_CPU2_MEM8_TASK',
-    namespace='default',
-    # namespace='airflow-cluster',
+    # namespace='default',
+    namespace='airflow-cluster',
     image='perl',
     cmds=['perl'],
     arguments=['-Mbignum=bpi', '-wle', 'print bpi(2000)'],
