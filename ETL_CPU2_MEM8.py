@@ -33,6 +33,8 @@ affinity = k8s.V1Affinity(
                             k8s.V1LabelSelectorRequirement(key="CPU", operator="In", values="2")
                         ]
                     ),
+                    topology_key="failure-domain.beta.kubernetes.io/zone",
+
                 ),
             )
         ]
