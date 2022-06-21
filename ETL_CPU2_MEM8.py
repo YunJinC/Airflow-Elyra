@@ -48,7 +48,7 @@ affinity = {
                     }]
                 }
             }
-
+}
 # Pod affinity with the KubernetesPodOperator
 # is not supported with Composer 2
 # instead, create a cluster and use the GKEStartPodOperator
