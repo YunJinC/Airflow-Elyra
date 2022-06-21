@@ -22,33 +22,20 @@ dag  = DAG(dag_id='ETL_CPU2_MEM8',
            tags=['Kube'],
         )
 
-affinity = {
-            'nodeAffinity': {
-                # requiredDuringSchedulingIgnoredDuringExecution means in order
-                # for a pod to be scheduled on a node, the node must have the
-                # specified labels. However, if labels on a node change at
-                # runtime such that the affinity rules on a pod are no longer
-                # met, the pod will still continue to run on the node.
-                'requiredDuringSchedulingIgnoredDuringExecution': {
-                    'nodeSelectorTerms': [{
-                        'matchExpressions': [{
-                            # When nodepools are created in Google Kubernetes
-                            # Engine, the nodes inside of that nodepool are
-                            # automatically assigned the label
-                            # 'cloud.google.com/gke-nodepool' with the value of
-                            # the nodepool's name.
-                            'key': 'cloud.google.com/gke-nodepool',
-                            'operator': 'In',
-                            # The label key's value that pods can be scheduled
-                            # on.
-                            'values': [
-                                'user-pool-cpu2-mem8',
+affinity = k8s.V1Affinity(
+            pod_anti_affinity=k8s.V1PodAntiAffinity(
+                required_during_scheduling_ignored_during_execution=[
+                    k8s.V1PodAffinityTerm(
+                        label_selector=k8s.V1LabelSelector(
+                            match_expressions=[
+                                k8s.V1LabelSelectorRequirement(key='CPU', operator='In', values=['2'])
                             ]
-                        }]
-                    }]
-                }
-            }
-}
+                        ),
+                        topology_key='kubernetes.io/hostname',
+                    )
+                ]
+            )
+        )
 # Pod affinity with the KubernetesPodOperator
 # is not supported with Composer 2
 # instead, create a cluster and use the GKEStartPodOperator
