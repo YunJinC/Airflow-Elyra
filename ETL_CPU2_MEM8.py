@@ -26,12 +26,9 @@ affinity = k8s.V1Affinity(
             node_affinity=k8s.V1NodeAffinity(
                 required_during_scheduling_ignored_during_execution=[
                     k8s.V1NodeSelectorTerm(
-                        label_selector=k8s.V1LabelSelector(
-                            match_expressions=[
-                                k8s.V1LabelSelectorRequirement(key='CPU', operator='In', values=['2'])
-                            ]
-                        ),
-                        topology_key='kubernetes.io/hostname',
+                        match_expressions=[
+                            k8s.V1LabelSelectorRequirement(key='CPU', operator='In', values=['2'])
+                        ]
                     )
                 ]
             )
