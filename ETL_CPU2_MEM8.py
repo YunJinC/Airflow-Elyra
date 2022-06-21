@@ -27,7 +27,7 @@ affinity = k8s.V1Affinity(
                 required_during_scheduling_ignored_during_execution=[
                     k8s.V1NodeSelectorTerm(
                         match_expressions=[
-                            k8s.V1LabelSelectorRequirement(key='CPU', operator='In', values=['2'])
+                            k8s.V1NodeSelectorRequirement(key='CPU', operator='In', values=['2'])
                         ]
                     )
                 ]
