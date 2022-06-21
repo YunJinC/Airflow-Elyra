@@ -26,7 +26,7 @@ dag  = DAG(dag_id='ETL_CPU4_MEM16',
 # https://cloud.google.com/composer/docs/using-gke-operator
 t1 = KubernetesPodOperator(
     task_id='ETL_CPU4_MEM16_TASK',
-    name='jupyterhub-cluster',
+    name='ETL_CPU4_MEM16_TASK',
     namespace='airflow-cluster',
     image='perl',
     cmds=['perl'],
