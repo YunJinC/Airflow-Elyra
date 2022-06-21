@@ -5,6 +5,8 @@ import pendulum
 from datetime import datetime
 from datetime import timedelta
 from airflow.utils.trigger_rule import TriggerRule
+from kubernetes.client import models as k8s
+
 
 KST = pendulum.timezone("Asia/Seoul")
 
