@@ -1,44 +1,38 @@
 from airflow.models import DAG
 from airflow.utils.dates import days_ago
-from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
+from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
 import pendulum
 from datetime import datetime
 from datetime import timedelta
 from airflow.utils.trigger_rule import TriggerRule
-from kubernetes.client import models as k8s
-
 
 KST = pendulum.timezone("Asia/Seoul")
 
 args = {
     'owner': 'airflow', 
-    'start_date': days_ago(1),
-#    'on_failure_callback' : alert.slack_fail_alert,
+    'start_date': days_ago(0),
      }
 
-dag  = DAG(dag_id='ETL_CPU2_MEM8',
+dag  = DAG(dag_id='ETL_CPU4_MEM16',
            default_args=args,
-           schedule_interval=timedelta(days=1),
+           schedule_interval=None,
            tags=['Kube'],
         )
 
 t1 = KubernetesPodOperator(
-    task_id='ETL_CPU2_MEM8_TASK',
-    name='ETL_CPU2_MEM8_TASK',
-    # namespace='default',
+    task_id='ETL_CPU4_MEM16_TASK',
+    name='ETL_CPU4_MEM16_TASK',
     namespace='airflow-cluster',
     image='ubuntu:18.04',
     cmds=['echo', 'TEST'],
-    # arguments=['-Mbignum=bpi', '-wle', 'print bpi(2000)'],
     # is_delete_operator_pod=True,
     # in_cluster=True,
-    # affinity=affinity,
     node_selectors={
-        "CPU": "2",
-        "MEM": "4",
+        "CPU": "4",
+        "MEM": "16",
         "app": "airflow"
     },
     dag=dag
-)
+    )
 
 t1
