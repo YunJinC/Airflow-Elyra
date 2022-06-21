@@ -24,22 +24,10 @@ dag  = DAG(dag_id='ETL_CPU2_MEM8',
 
 affinity = k8s.V1Affinity(
     node_affinity=k8s.V1NodeAffinity(
-        preferred_during_scheduling_ignored_during_execution=[
-            k8s.V1PreferredSchedulingTerm(
-                weight=1,
-                preference=k8s.V1NodeSelectorTerm(
-                    match_expressions=[
-                        k8s.V1NodeSelectorRequirement(key="CPU", operator="In", values=["2"])
-                    ]
-                ),
-            )
-        ]
-    ), 
-    pod_affinity=k8s.V1PodAffinity(
         required_during_scheduling_ignored_during_execution=[
-            k8s.V1WeightedPodAffinityTerm(
+            k8s.V1WeightedNodeAffinityTerm(
                 weight=1,
-                pod_affinity_term=k8s.V1PodAffinityTerm(
+                node_affinity_term=k8s.V1NodeAffinityTerm(
                     label_selector=k8s.V1LabelSelector(
                         match_expressions=[
                             k8s.V1LabelSelectorRequirement(key="CPU", operator="In", values="2")
