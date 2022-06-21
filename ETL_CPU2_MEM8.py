@@ -1,6 +1,6 @@
 from airflow.models import DAG
 from airflow.utils.dates import days_ago
-from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
+from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
 import pendulum
 from datetime import datetime
 from datetime import timedelta
@@ -22,24 +22,22 @@ dag  = DAG(dag_id='ETL_CPU2_MEM8',
            tags=['Kube'],
         )
 
-affinity = k8s.V1Affinity(
-    pod_affinity=k8s.V1PodAffinity(
-        required_during_scheduling_ignored_during_execution=[
-            k8s.V1WeightedPodAffinityTerm(
-                weight=1,
-                pod_affinity_term=k8s.V1PodAffinityTerm(
-                    label_selector=k8s.V1LabelSelector(
-                        match_expressions=[
-                            k8s.V1LabelSelectorRequirement(key="CPU", operator="In", values="2")
-                        ]
-                    ),
-                    topology_key="failure-domain.beta.kubernetes.io/zone",
-
-                ),
-            )
-        ]
-    ),
-)
+affinity = {
+    'nodeAffinity': {
+      'preferredDuringSchedulingIgnoredDuringExecution': [
+        {
+          "weight": 1,
+          "preference": {
+            "matchExpressions": {
+              "key": "CPU",
+              "operator": "In",
+              "values": ["2"]
+            }
+          }
+        }
+      ]
+    },
+}
 
 # Pod affinity with the KubernetesPodOperator
 # is not supported with Composer 2
