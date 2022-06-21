@@ -15,15 +15,15 @@ args = {
     'start_date': days_ago(0),
      }
 
-dag  = DAG(dag_id='ETL_CPU2_MEM8',
+dag  = DAG(dag_id='ETL_CPU2_MEM4',
            default_args=args,
            schedule_interval=None,
            tags=['Kube'],
         )
 
 t1 = KubernetesPodOperator(
-    task_id='ETL_CPU2_MEM4_TASK',
-    name='ETL_CPU2_MEM4_TASK',
+    task_id='ETL_CPU2_MEM8_TASK',
+    name='ETL_CPU2_MEM8_TASK',
     namespace='airflow-cluster',
     image='ubuntu:18.04',
     cmds=['echo', 'TEST'],
@@ -31,7 +31,7 @@ t1 = KubernetesPodOperator(
     # in_cluster=True,
     node_selectors={
         "CPU": "2",
-        "MEM": "4",
+        "MEM": "8",
         "app": "airflow"
     },
     dag=dag
