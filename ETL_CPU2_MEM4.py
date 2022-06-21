@@ -23,7 +23,7 @@ dag  = DAG(dag_id='ETL_CPU2_MEM8',
 
 t1 = KubernetesPodOperator(
     task_id='ETL_CPU2_MEM4_TASK',
-    name='ETL_CPU2_MEM4_TASK',
+    name='airflow-cluster-worker-ETL_CPU2_MEM4_TASK',
     namespace='airflow-cluster',
     image='ubuntu:18.04',
     cmds=['echo', 'TEST'],
