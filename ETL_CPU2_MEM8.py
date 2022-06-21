@@ -34,7 +34,22 @@ affinity = k8s.V1Affinity(
                 ),
             )
         ]
-    )
+    ), 
+    pod_affinity=k8s.V1PodAffinity(
+        required_during_scheduling_ignored_during_execution=[
+            k8s.V1WeightedPodAffinityTerm(
+                weight=1,
+                pod_affinity_term=k8s.V1PodAffinityTerm(
+                    label_selector=k8s.V1LabelSelector(
+                        match_expressions=[
+                            k8s.V1LabelSelectorRequirement(key="CPU", operator="In", values="2")
+                        ]
+                    ),
+                    topology_key="failure-domain.beta.kubernetes.io/zone",
+                ),
+            )
+        ]
+    ),
 )
 
 # Pod affinity with the KubernetesPodOperator
