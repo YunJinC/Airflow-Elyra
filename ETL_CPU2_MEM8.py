@@ -21,7 +21,7 @@ dag  = DAG(dag_id='ETL_CPU2_MEM8',
         )
 
 t1 = BashOperator(task_id='task1',
-                  bash_command=f'kubectl apply -f kubernetes/{dag_id}.yaml',
+                  bash_command=f'kubectl apply -f kubernetes/ETL_CPU2_MEM8.yaml',
                   trigger_rule=TriggerRule.ALL_DONE,
                   dag=dag)
 
