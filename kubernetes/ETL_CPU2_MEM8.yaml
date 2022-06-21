@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: ETL_CPU2_MEM8
+  namespace: airflow-cluster
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ETL_CPU2_MEM8
+  template:
+    metadata:
+      labels:
+        app: ETL_CPU2_MEM8
+    spec:
+      containers:
+      - name: ETL_CPU2_MEM8
+        image: perl
+        command:
+          - "perl"
+        args:
+          - "-Mbignum=bpi"
+          - "-wle"
+          - "print bpi(2000)"
