@@ -33,7 +33,6 @@ affinity = k8s.V1Affinity(
                             k8s.V1LabelSelectorRequirement(key="CPU", operator="In", values="2")
                         ]
                     ),
-                    topology_key="failure-domain.beta.kubernetes.io/zone",
                 ),
             )
         ]
@@ -53,11 +52,6 @@ t1 = KubernetesPodOperator(
     arguments=['-Mbignum=bpi', '-wle', 'print bpi(2000)'],
     is_delete_operator_pod=True,
     in_cluster=True,
-    # affinity allows you to constrain which nodes your pod is eligible to
-    # be scheduled on, based on labels on the node. In this case, if the
-    # label 'cloud.google.com/gke-nodepool' with value
-    # 'nodepool-label-value' or 'nodepool-label-value2' is not found on any
-    # nodes, it will fail to schedule.
     affinity=affinity,
     dag=dag
     )
