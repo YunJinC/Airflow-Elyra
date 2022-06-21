@@ -35,7 +35,7 @@ t1 = KubernetesPodOperator(
     # affinity=affinity,
     node_selectors={
         "CPU": "2",
-        "MEM": "4"
+        "MEM": "4",
         "app": "airflow"
     },
     dag=dag
