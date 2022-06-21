@@ -44,7 +44,7 @@ t1 = KubernetesPodOperator(
     name='ETL_CPU2_MEM8_TASK',
     # namespace='default',
     namespace='airflow-cluster',
-    image='perl',
+    image='ubuntu:18.04',
     cmds=['echo', 'TEST'],
     # arguments=['-Mbignum=bpi', '-wle', 'print bpi(2000)'],
     # is_delete_operator_pod=True,
