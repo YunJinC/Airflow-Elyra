@@ -23,21 +23,31 @@ dag  = DAG(dag_id='ETL_CPU2_MEM8',
         )
 
 affinity = {
-    'nodeAffinity': {
-      'preferredDuringSchedulingIgnoredDuringExecution': [
-        {
-          "weight": 1,
-          "preference": {
-            "matchExpressions": {
-              "key": "CPU",
-              "operator": "In",
-              "values": ["2"]
+            'nodeAffinity': {
+                # requiredDuringSchedulingIgnoredDuringExecution means in order
+                # for a pod to be scheduled on a node, the node must have the
+                # specified labels. However, if labels on a node change at
+                # runtime such that the affinity rules on a pod are no longer
+                # met, the pod will still continue to run on the node.
+                'requiredDuringSchedulingIgnoredDuringExecution': {
+                    'nodeSelectorTerms': [{
+                        'matchExpressions': [{
+                            # When nodepools are created in Google Kubernetes
+                            # Engine, the nodes inside of that nodepool are
+                            # automatically assigned the label
+                            # 'cloud.google.com/gke-nodepool' with the value of
+                            # the nodepool's name.
+                            'key': 'cloud.google.com/gke-nodepool',
+                            'operator': 'In',
+                            # The label key's value that pods can be scheduled
+                            # on.
+                            'values': [
+                                'user-pool-cpu2-mem8',
+                            ]
+                        }]
+                    }]
+                }
             }
-          }
-        }
-      ]
-    },
-}
 
 # Pod affinity with the KubernetesPodOperator
 # is not supported with Composer 2
