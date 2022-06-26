@@ -14,7 +14,7 @@ args = {
 #    'on_failure_callback' : alert.slack_fail_alert,
      }
 
-dag  = DAG(dag_id='ETL_ON_PREM',
+dag  = DAG(dag_id='ON_PREM',
            default_args=args,
            schedule_interval=timedelta(days=1),
            tags=['Kube'],
