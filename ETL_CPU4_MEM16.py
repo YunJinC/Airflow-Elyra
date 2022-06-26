@@ -13,7 +13,7 @@ args = {
     'start_date': days_ago(0),
      }
 
-dag  = DAG(dag_id='K8S_CPU4_MEM16',
+dag  = DAG(dag_id='ETL_K8S_CPU4_MEM16',
            default_args=args,
            schedule_interval=None,
            tags=['Kube'],
